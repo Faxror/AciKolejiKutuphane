@@ -19,31 +19,31 @@ namespace DataAccessLayer.Migrations
                 .HasAnnotation("ProductVersion", "5.0.13")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EntityLayer.Concrete.Kitap", b =>
+            modelBuilder.Entity("EntityLayer.Concrete.Book", b =>
                 {
-                    b.Property<int>("KitapID")
+                    b.Property<int>("BookID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("KitapBasımTarih")
+                    b.Property<string>("BookName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("BookPage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("BookPublishingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("KitapName")
+                    b.Property<string>("BookPublishingHouse")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("KitapSayfa")
+                    b.Property<string>("BookWritingName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("KitapYayınEvi")
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("BookID");
 
-                    b.Property<string>("KitapYazarName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("KitapID");
-
-                    b.ToTable("kitaps");
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

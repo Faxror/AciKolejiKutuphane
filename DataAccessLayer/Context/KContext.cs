@@ -14,7 +14,7 @@ namespace DataAccessLayer.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-I45D279;database=AcıkolejiKutuphane; Integrated security=true");
+            optionsBuilder.UseSqlServer("server=DESKTOP-I45D279;database=KutuphaneACİKOLEJİ; Integrated security=true");
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -23,6 +23,6 @@ namespace DataAccessLayer.Context
             builder.Entity<IdentityUserToken<string>>().HasNoKey();
         }
 
-        public DbSet<Kitap> kitaps { get; set; }
+        public DbSet<Book> Books { get; set; }
     }
 }
