@@ -31,7 +31,14 @@ namespace KutuphaneAçiKoleji
             services.AddScoped<IBookService, BookManager>();
             services.AddScoped<IBookDal, EFBookDal>();
 
+            services.AddScoped<IStudentService, StudentManager>();
+            services.AddScoped<IStudentDal, EFStudentDal>();
 
+            services.AddScoped<IRecordsService, RecordsManager>();
+            services.AddScoped<IRecordDal, EFRecordDal>();
+
+            services.AddScoped<ISchoolService, SchoolManager>();
+            services.AddScoped<ISchoolDal, EFSchoolDal>();
 
             services.AddControllersWithViews();
         }
@@ -59,8 +66,8 @@ namespace KutuphaneAçiKoleji
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    name: "Student",
+                    pattern: "{controller=Books}/{action=Index}/{id?}");
             });
         }
     }

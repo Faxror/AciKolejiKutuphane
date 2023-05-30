@@ -14,15 +14,24 @@ namespace DataAccessLayer.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-I45D279;database=KutuphaneACİKOLEJİ; Integrated security=true");
+            optionsBuilder.UseSqlServer("server=DESKTOP-I45D279;database=AciKolejiKağıthane; Integrated security=true");
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Student>()
+    .HasOne(s => s.school)
+    .WithMany()
+    .HasForeignKey(s => s.SchoolID);
+            builder.Entity<Records>()
+               .HasKey(s => s.RecordID);
             builder.Entity<IdentityUserLogin<string>>().HasNoKey();
             builder.Entity<IdentityUserRole<string>>().HasNoKey();
             builder.Entity<IdentityUserToken<string>>().HasNoKey();
         }
 
         public DbSet<Book> Books { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Records> Records { get; set; }
+        public DbSet<school> Schools { get; set; }
     }
 }

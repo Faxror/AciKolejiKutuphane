@@ -46,6 +46,92 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Books");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Records", b =>
+                {
+                    b.Property<int>("RecordID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("BookID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Page")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PurchaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudenID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("StudentID")
+                        .HasColumnType("int");
+
+                    b.HasKey("RecordID");
+
+                    b.HasIndex("BookID");
+
+                    b.HasIndex("StudentID");
+
+                    b.ToTable("Records");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Student", b =>
+                {
+                    b.Property<int>("StudentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("SchoolID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SchoolID1")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StudentClass")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentSchoolName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("StudentID");
+
+                    b.HasIndex("SchoolID");
+
+                    b.HasIndex("SchoolID1");
+
+                    b.ToTable("Students");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.school", b =>
+                {
+                    b.Property<int>("SchoolID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("SchoolName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SchoolID");
+
+                    b.ToTable("Schools");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -202,6 +288,51 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.ToTable("UserTokens");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Records", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Book", "Book")
+                        .WithMany("Records")
+                        .HasForeignKey("BookID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Student", null)
+                        .WithMany("Records")
+                        .HasForeignKey("StudentID");
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Student", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.school", "school")
+                        .WithMany()
+                        .HasForeignKey("SchoolID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.school", null)
+                        .WithMany("students")
+                        .HasForeignKey("SchoolID1");
+
+                    b.Navigation("school");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Book", b =>
+                {
+                    b.Navigation("Records");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Student", b =>
+                {
+                    b.Navigation("Records");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.school", b =>
+                {
+                    b.Navigation("students");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,38 @@
+﻿@model EntityLayer.Concrete.Student
+@{
+    ViewData["Title"] = "AddStudents";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yeni Oğrenci Ekleme</h4>
+            <form class="forms-sample" method="post">
+            
+                <div class="form-group">
+                    <label for="exampleInputName1">Oğrenci Adı</label>
+                    <span asp-validation-for="StudentName" class="text text-danger"></span>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Lütfen Oğrenci Adını Giriniz" asp-for="StudentName">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Oğrenci No</label>
+                    <span asp-validation-for="StudentNo" class="text text-danger"></span>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Lütfen Oğrenci No Giriniz" asp-for="StudentNo">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Oğrenci Sınıfı</label>
+                    <span asp-validation-for="StudentClass" class="text text-danger"></span>
+                    <input type="number" class="form-control" id="exampleInputName1" placeholder="Lütfen Oğrencinin Sınıfını Giriniz" asp-for="StudentClass">
+                </div>
+                <div class="form-group">
+                    @Html.Label("Okuıl Adı Giriniz / Seçiniz")
+                    @Html.DropDownListFor(x => x.SchoolID, (List<SelectListItem>)ViewBag.v, new { @class = "form-control" })
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Ekle</button>
+                <button class="btn btn-light">Geri Dön</button>
+            </form>
+        </div>
+    </div>
+</div>
+

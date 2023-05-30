@@ -3,25 +3,25 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class mig_1_addbooks : Migration
+    public partial class mig_sql_columns : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "kitaps",
+                name: "Books",
                 columns: table => new
                 {
-                    KitapID = table.Column<int>(type: "int", nullable: false)
+                    BookID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    KitapName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    KitapYazarName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    KitapSayfa = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    KitapYayınEvi = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    KitapBasımTarih = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    BookName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookWritingName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookPage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookPublishingHouse = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookPublishingDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_kitaps", x => x.KitapID);
+                    table.PrimaryKey("PK_Books", x => x.BookID);
                 });
 
             migrationBuilder.CreateTable(
@@ -43,8 +43,7 @@ namespace DataAccessLayer.Migrations
                 name: "Roles",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -52,6 +51,19 @@ namespace DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Schools",
+                columns: table => new
+                {
+                    SchoolID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SchoolName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Schools", x => x.SchoolID);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,8 +88,7 @@ namespace DataAccessLayer.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProviderKey = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -87,8 +98,7 @@ namespace DataAccessLayer.Migrations
                 name: "UserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RoleId = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -99,8 +109,7 @@ namespace DataAccessLayer.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -125,8 +134,7 @@ namespace DataAccessLayer.Migrations
                 name: "UserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LoginProvider = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -134,12 +142,93 @@ namespace DataAccessLayer.Migrations
                 constraints: table =>
                 {
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    StudentID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StudentName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudentNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudentClass = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudentSchoolName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SchoolID = table.Column<int>(type: "int", nullable: false),
+                    SchoolID1 = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.StudentID);
+                    table.ForeignKey(
+                        name: "FK_Students_Schools_SchoolID",
+                        column: x => x.SchoolID,
+                        principalTable: "Schools",
+                        principalColumn: "SchoolID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_Schools_SchoolID1",
+                        column: x => x.SchoolID1,
+                        principalTable: "Schools",
+                        principalColumn: "SchoolID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Records",
+                columns: table => new
+                {
+                    RecordID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Page = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PurchaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StudenID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BookID = table.Column<int>(type: "int", nullable: false),
+                    StudentID = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Records", x => x.RecordID);
+                    table.ForeignKey(
+                        name: "FK_Records_Books_BookID",
+                        column: x => x.BookID,
+                        principalTable: "Books",
+                        principalColumn: "BookID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Records_Students_StudentID",
+                        column: x => x.StudentID,
+                        principalTable: "Students",
+                        principalColumn: "StudentID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Records_BookID",
+                table: "Records",
+                column: "BookID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Records_StudentID",
+                table: "Records",
+                column: "StudentID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_SchoolID",
+                table: "Students",
+                column: "SchoolID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_SchoolID1",
+                table: "Students",
+                column: "SchoolID1");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "kitaps");
+                name: "Records");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");
@@ -161,6 +250,15 @@ namespace DataAccessLayer.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Students");
+
+            migrationBuilder.DropTable(
+                name: "Schools");
         }
     }
 }

@@ -1,0 +1,48 @@
+﻿@model EntityLayer.Concrete.Records
+@{
+    ViewData["Title"] = "AddRecords";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Yeni Ödünç Verme</h4>
+            <form class="forms-sample" method="post">
+                <div class="form-group">
+                    @Html.Label("Kitap Adı")
+                    @Html.DropDownListFor(x => x.BookID, (List<SelectListItem>)ViewBag.v, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Oğrenci Adı</label>
+                    <span asp-validation-for="StudenID" class="text text-danger"></span>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Lütfen Oğrenci Adını Giriniz" asp-for="StudenID">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Kitap Sayfa Sayısı</label>
+                    <span asp-validation-for="Page" class="text text-danger"></span>
+                    <input type="number" class="form-control" id="exampleInputName1" placeholder="Lütfen Sayfa Sayısını Giriniz" asp-for="Page">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Alış Tarihi</label>
+                    <span asp-validation-for="PurchaseDate" class="text text-danger"></span>
+                    <input type="date" class="form-control" id="exampleInputName1" placeholder="Lütfen Alış Tarihi Giriniz" asp-for="PurchaseDate">
+                </div>  <div class="form-group">
+                    <label for="exampleInputName1">Bitiş Tarihi</label>
+                    <span asp-validation-for="EndDate" class="text text-danger"></span>
+                    <input type="date" class="form-control" id="exampleInputName1" placeholder="Lütfen Bitiş Tarihi Giriniz" asp-for="EndDate">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Durum</label>
+                    <span asp-validation-for="Status" class="text text-danger"></span>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Lütfen Basım Evi Adını Giriniz" asp-for="Status">
+                </div>
+
+                <button type="submit" class="btn btn-outline-primary">Ekle</button>
+                <button class="btn btn-light">Geri Dön</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+

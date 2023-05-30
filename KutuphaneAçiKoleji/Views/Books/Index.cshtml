@@ -24,15 +24,15 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>@item.BookID</td>
-                            <td>@item.BookName</td>
-                            <td>@item.BookWritingName</td>
-                            <td>@item.BookPage</td>
-                            <td>@item.BookPublishingDate</td>
-                            <td>@item.BookPublishingHouse</td>
-                            <td><a href="/Books/DeleteBooks/@item.BookID" class="btn btn-outline-danger">Sil</a> <a href="/Books/UpdateBooks/@item.BookID" class="btn btn-outline-success">Düzenle</a></td>
-                        </tr>
+                            <tr>
+                                <td>@item.BookID</td>
+                                <td>@item.BookName</td>
+                                <td>@item.BookWritingName</td>
+                                <td>@item.BookPage</td>
+                                <td>@item.BookPublishingDate</td>
+                                <td>@item.BookPublishingHouse</td>
+                                <td><a href="/Books/DeleteBooks/@item.BookID" class="btn btn-outline-danger">Sil</a> <a href="/Books/UpdateBooks/@item.BookID" class="btn btn-outline-success">Düzenle</a></td>
+                                 </tr>
                         }
                     </tbody>
                 </table>

@@ -14,5 +14,7 @@ namespace EntityLayer.Concrete
         public string BookPage { get; set; }
         public string BookPublishingHouse { get; set; }
         public DateTime BookPublishingDate { get; set; }
+
+        public List<Records> Records { get; set; }
     }
 }
