@@ -11,6 +11,8 @@ namespace DataAccessLayer.Abstract
     {
         List<Records> GetFlimListWhiteRecord();
 
+        List<Records> GetSchoolList();
+
 
 
     }

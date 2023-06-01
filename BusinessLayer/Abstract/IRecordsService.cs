@@ -12,6 +12,8 @@ namespace BusinessLayer.Abstract
     {
         List<Records> GetFlimListWhiteRecord();
 
+        List<Records> GetSchoolList();
+
 
     }
 }

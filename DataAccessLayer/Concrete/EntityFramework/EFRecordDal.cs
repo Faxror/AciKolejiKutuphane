@@ -23,6 +23,13 @@ namespace DataAccessLayer.Concrete.EntityFramework
            
         }
 
+        public List<Records> GetSchoolList()
+        {
+            using (var c = new KContext())
+            {
+                return c.Records.Include(x => x.Student).ToList();
+            }
+        }
 
     }
 }

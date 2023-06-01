@@ -1,10 +1,15 @@
 using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
+using BusinessLayer.Container;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete.EntityFramework;
+using DataAccessLayer.Context;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,19 +33,25 @@ namespace KutuphaneAçiKoleji
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddScoped<IBookService, BookManager>();
-            services.AddScoped<IBookDal, EFBookDal>();
+            services.ContainerDependencies();
 
-            services.AddScoped<IStudentService, StudentManager>();
-            services.AddScoped<IStudentDal, EFStudentDal>();
 
-            services.AddScoped<IRecordsService, RecordsManager>();
-            services.AddScoped<IRecordDal, EFRecordDal>();
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<KContext>();
 
-            services.AddScoped<ISchoolService, SchoolManager>();
-            services.AddScoped<ISchoolDal, EFSchoolDal>();
 
+
+            services.AddDbContext<KContext>();
             services.AddControllersWithViews();
+
+            services.AddMvc(config =>
+            {
+
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Students/Index";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +69,8 @@ namespace KutuphaneAçiKoleji
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 

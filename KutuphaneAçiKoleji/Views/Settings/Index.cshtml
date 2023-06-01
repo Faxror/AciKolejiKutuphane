@@ -1,0 +1,33 @@
+﻿@model KutuphaneAçiKoleji.Models.UserEditViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="col-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Bilgilerim</h4>
+            <form class="forms-sample" method="post">
+                <div class="form-group">
+                    <label for="exampleInputName1">Kullanıcı Adınız</label>
+                    <input type="text" class="form-control" id="exampleInputName1" placeholder="Lütfen Yeni Kullanıcı Adını Giriniz" asp-for="Username">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Email Adresiniz</label>
+                    <input type="email" class="form-control" id="exampleInputName1" placeholder="Lütfen Yeni Email Adresinizi Giriniz" asp-for="Email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Lütfen Şifrenizi Giriniz</label>
+                    <input type="password" class="form-control" id="exampleInputName1" placeholder="Lütfen Yeni Şifrenizi Giriniz" asp-for="Password">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputName1">Lütfen Şifrenizi Tekrar Giriniz</label>
+                    <input type="password" class="form-control" id="exampleInputName1" placeholder="Lütfen Yeni Şifrenizi Tekrar Giriniz" asp-for="ConfirmPassword">
+                </div>
+                <button type="submit" class="btn btn-outline-primary">Düzenle</button>
+            </form>
+        </div>
+    </div>
+</div>
+

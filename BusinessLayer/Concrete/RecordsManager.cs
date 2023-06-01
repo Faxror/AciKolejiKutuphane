@@ -38,6 +38,10 @@ namespace BusinessLayer.Concrete
             return _recordDal.GetListAll();
         }
 
+        public List<Records> GetSchoolList()
+        {
+            return _recordDal.GetSchoolList();
+        }
 
         public void Insert(Records t)
         {

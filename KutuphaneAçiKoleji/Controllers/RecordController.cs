@@ -22,8 +22,12 @@ namespace KutuphaneAçiKoleji.Controllers
 
         public IActionResult Index()
         {
-            var value = _recordDal.GetFlimListWhiteRecord();
-            return View("~/Views/Record/Index.cshtml", value);
+            var kayit1 = _recordDal.GetFlimListWhiteRecord();
+            var kayit2 = _recordDal.GetSchoolList();
+            //return View("~/Views/Record/Index.cshtml", kayit1);
+            return View(kayit1);
+
+            
 
         }
         [HttpGet]
